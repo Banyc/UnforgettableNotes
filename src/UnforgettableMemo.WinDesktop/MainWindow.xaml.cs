@@ -27,11 +27,23 @@ namespace UnforgettableMemo.WinDesktop
             public Memo DisplayingMemo { get; set; }
         }
 
+        private readonly string settingsDirectory = "desktop";
+        private readonly string settingsFilename = "mainWindowSettings.json";
+
         private readonly MainWindowViewModel viewModel = new MainWindowViewModel();
 
         private MemoScheduler memoScheduler;
         public MainWindow()
         {
+            MainWindowSettings settings = LoadSettings();
+            if (settings.LeftLocation != null)
+            {
+                this.Left = settings.LeftLocation.Value;
+            }
+            if (settings.TopLocation != null)
+            {
+                this.Top = settings.TopLocation.Value;
+            }
             InitializeComponent();
         }
 
@@ -84,6 +96,11 @@ namespace UnforgettableMemo.WinDesktop
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
+            SaveSettings(new MainWindowSettings()
+            {
+                LeftLocation = this.Left,
+                TopLocation = this.Top
+            });
             this.Close();
         }
 
