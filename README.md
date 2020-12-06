@@ -2,7 +2,7 @@
 
 A memo APP that shows memo based on decay theory. 
 
-For desktop client, it startup when boot up. Its window could not be closed but it could be covered by other windows.
+For desktop client, it startups when machine boots up. Its window could not be closed but it could be covered by other windows.
 
 ## Memo Persistence
 
