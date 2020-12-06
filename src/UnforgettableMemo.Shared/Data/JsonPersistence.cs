@@ -7,24 +7,30 @@ namespace UnforgettableMemo.Shared.Data
 {
     public class JsonPersistence : IMemoPersistence
     {
-        private string FilePath { get; }
+        private string FileDirctory { get; }
         private string Filename { get; }
-        public JsonPersistence(string path, string filename = "memos.json")
+        public JsonPersistence(string fileDirctory, string filename = "memos.json")
         {
-            this.FilePath = path;
+            this.FileDirctory = fileDirctory;
             this.Filename = filename;
         }
         public List<Memo> Load()
         {
-            string fileText = File.ReadAllText(Path.Combine(this.FilePath, this.Filename));
+            string filePath = Path.Combine(this.FileDirctory, this.Filename);
+            if (!File.Exists(filePath))
+            {
+                return new List<Memo>();
+            }
+            string fileText = File.ReadAllText(filePath);
             List<Memo> memos = JsonSerializer.Deserialize<List<Memo>>(fileText);
             return memos;
         }
 
         public void Save(List<Memo> memos)
         {
+            Directory.CreateDirectory(this.FileDirctory);
             string fileText = JsonSerializer.Serialize(memos);
-            File.WriteAllText(Path.Combine(this.FilePath, this.Filename), fileText);
+            File.WriteAllText(Path.Combine(this.FileDirctory, this.Filename), fileText);
         }
     }
 }
