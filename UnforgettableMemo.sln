@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{995545C3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnforgettableMemo.Shared.Tests", "tests\UnforgettableMemo.Shared.Tests\UnforgettableMemo.Shared.Tests.csproj", "{59CF0516-C5D3-40C0-9B67-FB183AB88007}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnforgettableMemo.WinDesktop", "src\UnforgettableMemo.WinDesktop\UnforgettableMemo.WinDesktop.csproj", "{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,9 +50,22 @@ Global
 		{59CF0516-C5D3-40C0-9B67-FB183AB88007}.Release|x64.Build.0 = Release|Any CPU
 		{59CF0516-C5D3-40C0-9B67-FB183AB88007}.Release|x86.ActiveCfg = Release|Any CPU
 		{59CF0516-C5D3-40C0-9B67-FB183AB88007}.Release|x86.Build.0 = Release|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Debug|x64.Build.0 = Debug|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Release|x64.ActiveCfg = Release|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Release|x64.Build.0 = Release|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{762F5D48-46D7-4A0C-B7E8-BF5B6E11925A} = {B0924559-F233-467F-A027-25BAE312ABFF}
 		{59CF0516-C5D3-40C0-9B67-FB183AB88007} = {995545C3-ED8F-4092-B88E-DA4E4966D007}
+		{8A2EA7DF-DBEA-4717-961A-E1455184DFDE} = {B0924559-F233-467F-A027-25BAE312ABFF}
 	EndGlobalSection
 EndGlobal
