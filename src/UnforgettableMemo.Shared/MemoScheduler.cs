@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnforgettableMemo.Shared.Models;
@@ -16,12 +17,27 @@ namespace UnforgettableMemo.Shared
 
         public void OrderByRetrievability()
         {
+            // order
             this.Memos = this.Memos.OrderBy(xxxx => xxxx.Retrievability).ToList();
+        }
+
+        public Memo GetNewMemo()
+        {
+            Memo newMemo = new Memo();
+            this.Memos.Add(newMemo);
+            return newMemo;
+        }
+
+        public void RemoveMemo(Memo memoToRemove)
+        {
+            this.Memos.RemoveAll(xxxx => xxxx.Id == memoToRemove.Id);
         }
 
         public void Save()
         {
-            memoPersistence.Save(this.Memos);
+            // // remove blank memos
+            List<Memo> cleanMemos = this.Memos.Where(xxxx => !string.IsNullOrWhiteSpace(xxxx.Content)).ToList();
+            memoPersistence.Save(cleanMemos);
         }
 
         public void Load()

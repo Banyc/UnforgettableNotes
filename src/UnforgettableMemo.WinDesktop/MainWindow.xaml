@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         WindowStyle="None"
         AllowsTransparency="True"
+        ShowInTaskbar="False"
+        Loaded="Window_Loaded"
+        Deactivated="Window_Deactivated"
         Title="MainWindow" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,12 +23,12 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Name="btnAdd">Add</Button>
+            <Button Grid.Column="0" Name="btnAdd" xml:space="preserve" Click="btnAdd_Click"> + </Button>
             <Button Grid.Column="1" Name="topBar" PreviewMouseLeftButtonDown="topBar_PreviewMouseLeftButtonDown"></Button>
-            <Button Grid.Column="2" Name="btnExit" Click="btnExit_Click">Exit</Button>
+            <Button Grid.Column="2" Name="btnExit" xml:space="preserve" Click="btnExit_Click"> X </Button>
         </Grid>
         <Grid Grid.Row="1">
-            <TextBox AcceptsReturn="True" Padding="8" FontSize="16">
+            <TextBox Name="txtContent" AcceptsReturn="True" Padding="8" FontSize="16" Text="{Binding Path=DisplayingMemo.Content, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txtContent_TextChanged">
                 
             </TextBox>
         </Grid>
@@ -34,8 +37,8 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0">Review</Button>
-            <Button Grid.Column="1">Delete</Button>
+            <Button Grid.Column="0" Name="btnReview" Click="btnReview_Click">✔️</Button>
+            <Button Grid.Column="1" Name="btnDelete" Click="btnDelete_Click">🗑️</Button>
         </Grid>
     </Grid>
 </Window>

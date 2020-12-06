@@ -29,7 +29,10 @@ namespace UnforgettableMemo.Shared.Data
         public void Save(List<Memo> memos)
         {
             Directory.CreateDirectory(this.FileDirctory);
-            string fileText = JsonSerializer.Serialize(memos);
+            string fileText = JsonSerializer.Serialize(memos, new JsonSerializerOptions()
+            {
+                WriteIndented = true
+            });
             File.WriteAllText(Path.Combine(this.FileDirctory, this.Filename), fileText);
         }
     }

@@ -1,14 +1,18 @@
+using System.Runtime.Serialization;
 using System;
+using System.Text.Json.Serialization;
+
 namespace UnforgettableMemo.Shared.Models
 {
     // Forgetting curve: https://supermemo.guru/wiki/Forgetting_curve
     [Serializable]
     public class Memo
     {
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Content { get; set; }
         public DateTime Creation { get; set; } = DateTime.Now;
         public DateTime LastCheck { get; set; } = DateTime.Now;
+        [JsonIgnore]
         public TimeSpan Time
         {
             get
