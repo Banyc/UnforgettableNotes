@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:UnforgettableMemo.WinDesktop"
         mc:Ignorable="d"
         WindowStyle="None"
-        AllowsTransparency="True"
+        AllowsTransparency="False"
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
         Deactivated="Window_Deactivated"
+        ResizeMode="CanResize"
         Title="MainWindow" Height="300" Width="300">
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +29,7 @@
             <Button Grid.Column="2" Name="btnExit" xml:space="preserve" Click="btnExit_Click"> X </Button>
         </Grid>
         <Grid Grid.Row="1">
-            <TextBox Name="txtContent" AcceptsReturn="True" Padding="8" FontSize="16" Text="{Binding Path=DisplayingMemo.Content, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txtContent_TextChanged">
+            <TextBox Name="txtContent" AcceptsReturn="True" Padding="8" FontSize="16" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DisplayingMemo.Content, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txtContent_TextChanged">
                 
             </TextBox>
         </Grid>
