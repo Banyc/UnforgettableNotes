@@ -10,6 +10,7 @@ namespace UnforgettableMemo.Shared
             this.PersistenceDirectory = persistenceDirectory;
         }
 
+        // with JSON persistence
         public MemoScheduler GetMemoScheduler()
         {
             JsonPersistence persistence = new JsonPersistence(this.PersistenceDirectory);

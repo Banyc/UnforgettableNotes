@@ -17,10 +17,11 @@ namespace UnforgettableMemo.Shared
 
         public void OrderByRetrievability()
         {
-            // order
+            // ascending order
             this.Memos = this.Memos.OrderBy(xxxx => xxxx.Retrievability).ToList();
         }
 
+        // get new memo that has just been added to the list
         public Memo GetNewMemo()
         {
             Memo newMemo = new Memo();
@@ -35,7 +36,7 @@ namespace UnforgettableMemo.Shared
 
         public void Save()
         {
-            // // remove blank memos
+            // remove blank memos
             List<Memo> cleanMemos = this.Memos.Where(xxxx => !string.IsNullOrWhiteSpace(xxxx.Content)).ToList();
             memoPersistence.Save(cleanMemos);
         }

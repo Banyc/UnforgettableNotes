@@ -22,21 +22,15 @@ namespace UnforgettableMemo.WinDesktop
     /// </summary>
     public partial class MainWindow : Window
     {
-        public class MainWindowViewModel
-        {
-            public Memo DisplayingMemo { get; set; }
-        }
-
         private readonly string settingsDirectory = "desktop";
         private readonly string settingsFilename = "mainWindowSettings.json";
+        private readonly MemoScheduler memoScheduler;
 
-        private readonly MainWindowViewModel viewModel = new MainWindowViewModel();
-
-        private MemoScheduler memoScheduler;
         public MainWindow()
         {
             MainWindowSettings settings = LoadSettings();
             this.mainWindowSettings = settings;
+            // restore the last window position
             if (settings.LeftLocation != null)
             {
                 this.Left = settings.LeftLocation.Value;
@@ -45,18 +39,15 @@ namespace UnforgettableMemo.WinDesktop
             {
                 this.Top = settings.TopLocation.Value;
             }
+
             InitializeComponent();
-        }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
+            // initiate memoScheduler
             MemoSchedulerFactory memoSchedulerFactory = new MemoSchedulerFactory("memos/");
-
             this.memoScheduler = memoSchedulerFactory.GetMemoScheduler();
             this.memoScheduler.Load();
-            UpdateDisplayingMemo();
 
-            this.DataContext = viewModel;
+            UpdateDisplayingMemo();
         }
 
         private void UpdateDisplayingMemo()
@@ -72,53 +63,11 @@ namespace UnforgettableMemo.WinDesktop
             this.memoScheduler.Save();
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(this.viewModel.DisplayingMemo.Content))
-            {
-                return;
-            }
-            this.viewModel.DisplayingMemo = this.memoScheduler.GetNewMemo();
-            UpdateFrontend();
-            this.memoScheduler.Save();
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            this.memoScheduler.RemoveMemo(viewModel.DisplayingMemo);
-            UpdateDisplayingMemo();
-        }
-
-        private void btnReview_Click(object sender, RoutedEventArgs e)
-        {
-            this.viewModel.DisplayingMemo.Review();
-            UpdateDisplayingMemo();
-        }
-
-        private void btnExit_Click(object sender, RoutedEventArgs e)
-        {
-            SaveSettings(new MainWindowSettings()
-            {
-                LeftLocation = this.Left,
-                TopLocation = this.Top
-            });
-            this.Close();
-        }
-
-        private void topBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void txtContent_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            UpdateFrontend();
-            this.memoScheduler.Save();
-        }
-
+        // update view only
         private void UpdateFrontend()
         {
             UpdateTxtContent();
+            // set window topmost if the displaying memo is somewhat not remembered
             if (this.mainWindowSettings.IsPreemptive)
             {
                 this.Topmost = this.viewModel.DisplayingMemo.Retrievability < this.mainWindowSettings.RetrievabilityThreshold;
@@ -129,11 +78,6 @@ namespace UnforgettableMemo.WinDesktop
         {
             BindingExpression binding = this.txtContent.GetBindingExpression(TextBox.TextProperty);
             binding.UpdateSource();
-        }
-
-        private void Window_Deactivated(object sender, EventArgs e)
-        {
-            this.Activate();
         }
     }
 }
