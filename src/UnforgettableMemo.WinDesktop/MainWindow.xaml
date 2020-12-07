@@ -31,7 +31,7 @@
             <Button Grid.Column="3" Name="btnExit" xml:space="preserve" Click="btnExit_Click"> X </Button>
         </Grid>
         <Grid Grid.Row="1">
-            <TextBox Name="txtContent" AcceptsReturn="True" Padding="8" FontSize="16" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DisplayingMemo.Content, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txtContent_TextChanged">
+            <TextBox Name="txtContent" AcceptsReturn="True" Padding="8" FontSize="16" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DisplayingMemo.Content, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txtContent_TextChanged">
                 
             </TextBox>
         </Grid>
