@@ -29,24 +29,24 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Name="btnAdd" Style="{DynamicResource MaterialDesignFlatButton}" xml:space="preserve" Click="btnAdd_Click"> + </Button>
-            <TextBlock Grid.Column="1" Name="topBar" PreviewMouseLeftButtonDown="topBar_PreviewMouseLeftButtonDown"></TextBlock>
-            <Button Grid.Column="2" Name="btnRefresh" Style="{DynamicResource MaterialDesignFlatButton}" xml:space="preserve" Click="btnRefresh_Click">🔄</Button>
-            <Button Grid.Column="3" Name="btnExit" Style="{DynamicResource MaterialDesignFlatButton}" xml:space="preserve" Click="btnExit_Click"> X </Button>
-        </Grid>
+            <Grid Grid.Row="0" Name="topBar" MouseLeftButtonDown="topBar_MouseLeftButtonDown">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Name="btnAdd" Style="{DynamicResource MaterialDesignFlatButton}" xml:space="preserve" Click="btnAdd_Click"> + </Button>
+                <Grid Grid.Column="1"></Grid>
+                <Button Grid.Column="2" Name="btnRefresh" Style="{DynamicResource MaterialDesignFlatButton}" xml:space="preserve" Click="btnRefresh_Click">🔄</Button>
+                <Button Grid.Column="3" Name="btnExit" Style="{DynamicResource MaterialDesignFlatButton}" xml:space="preserve" Click="btnExit_Click"> X </Button>
+            </Grid>
         <Grid Grid.Row="1">
             <TextBox Name="txtContent" Style="{DynamicResource MaterialDesignOutlinedTextBox}" BorderThickness="0" AcceptsReturn="True" Padding="8" FontSize="16" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Path=DisplayingMemo.Content, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="txtContent_TextChanged">
                 
             </TextBox>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>

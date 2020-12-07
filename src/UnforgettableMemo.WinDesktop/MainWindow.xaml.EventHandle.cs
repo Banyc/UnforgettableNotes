@@ -31,6 +31,7 @@ namespace UnforgettableMemo.WinDesktop
             }
             this.viewModel.DisplayingMemo = this.memoScheduler.GetNewMemo();
             UpdateFrontend();
+            this.txtContent.Focus();
             this.memoScheduler.Save();
         }
 
@@ -72,7 +73,7 @@ namespace UnforgettableMemo.WinDesktop
         }
 
         // drag the topBar and move the window
-        private void topBar_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void topBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
         }

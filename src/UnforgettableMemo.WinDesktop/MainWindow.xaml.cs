@@ -81,7 +81,16 @@ namespace UnforgettableMemo.WinDesktop
             // set window topmost if the displaying memo is somewhat not remembered
             if (this.mainWindowSettings.IsPreemptive)
             {
-                this.Topmost = this.viewModel.DisplayingMemo.Retrievability < this.mainWindowSettings.RetrievabilityThreshold;
+                if (this.viewModel.DisplayingMemo.Retrievability < this.mainWindowSettings.RetrievabilityThreshold)
+                {
+                    this.Topmost = true;
+                    this.topBar.Background = Brushes.OrangeRed;
+                }
+                else
+                {
+                    this.Topmost = false;
+                    this.topBar.Background = this.Background;
+                }
             }
         }
 
