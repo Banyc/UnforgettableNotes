@@ -36,6 +36,7 @@ namespace UnforgettableMemo.WinDesktop
         public MainWindow()
         {
             MainWindowSettings settings = LoadSettings();
+            this.mainWindowSettings = settings;
             if (settings.LeftLocation != null)
             {
                 this.Left = settings.LeftLocation.Value;
@@ -66,7 +67,7 @@ namespace UnforgettableMemo.WinDesktop
                 this.memoScheduler.GetNewMemo();
             }
             this.viewModel.DisplayingMemo = this.memoScheduler.Memos[0];
-            UpdateTxtContent();
+            UpdateFrontend();
 
             this.memoScheduler.Save();
         }
@@ -78,7 +79,7 @@ namespace UnforgettableMemo.WinDesktop
                 return;
             }
             this.viewModel.DisplayingMemo = this.memoScheduler.GetNewMemo();
-            UpdateTxtContent();
+            UpdateFrontend();
             this.memoScheduler.Save();
         }
 
@@ -111,8 +112,17 @@ namespace UnforgettableMemo.WinDesktop
 
         private void txtContent_TextChanged(object sender, TextChangedEventArgs e)
         {
-            UpdateTxtContent();
+            UpdateFrontend();
             this.memoScheduler.Save();
+        }
+
+        private void UpdateFrontend()
+        {
+            UpdateTxtContent();
+            if (this.mainWindowSettings.IsPreemptive)
+            {
+                this.Topmost = this.viewModel.DisplayingMemo.Retrievability < this.mainWindowSettings.RetrievabilityThreshold;
+            }
         }
 
         private void UpdateTxtContent()

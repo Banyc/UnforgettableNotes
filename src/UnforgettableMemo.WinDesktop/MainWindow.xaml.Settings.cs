@@ -5,10 +5,14 @@ namespace UnforgettableMemo.WinDesktop
 {
     public partial class MainWindow
     {
+        private readonly MainWindowSettings mainWindowSettings;
+
         public class MainWindowSettings
         {
             public double? TopLocation { get; set; }
             public double? LeftLocation { get; set; }
+            public bool IsPreemptive { get; set; } = true;
+            public double RetrievabilityThreshold { get; set; } = 0.9;
         }
 
         private MainWindowSettings LoadSettings()
