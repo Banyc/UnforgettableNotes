@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using UnforgettableMemo.Shared;
 using UnforgettableMemo.Shared.Models;
 
@@ -25,6 +27,7 @@ namespace UnforgettableMemo.WinDesktop
         private readonly string settingsDirectory = "desktop";
         private readonly string settingsFilename = "mainWindowSettings.json";
         private readonly MemoScheduler memoScheduler;
+        private readonly DispatcherTimer timer;
 
         public MainWindow()
         {
@@ -48,8 +51,16 @@ namespace UnforgettableMemo.WinDesktop
             this.memoScheduler.Load();
 
             UpdateDisplayingMemo();
+
+            // initiate timer
+            this.timer = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMinutes(30)
+            };
+            this.timer.Tick += Timer_Tick;
         }
 
+        // Display the least memorized memo
         private void UpdateDisplayingMemo()
         {
             this.memoScheduler.OrderByRetrievability();

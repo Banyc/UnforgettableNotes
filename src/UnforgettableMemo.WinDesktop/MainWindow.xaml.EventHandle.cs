@@ -1,3 +1,4 @@
+using System.Timers;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +8,15 @@ namespace UnforgettableMemo.WinDesktop
 {
     public partial class MainWindow
     {
+        // Display the least memorized memo
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateDisplayingMemo();
+
+            // make sure the timer is set
+            this.timer.Start();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = viewModel;
@@ -38,6 +48,16 @@ namespace UnforgettableMemo.WinDesktop
             UpdateDisplayingMemo();
         }
 
+        // Display the least memorized memo
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            // reset timer
+            this.timer.Stop();
+            this.timer.Start();
+
+            UpdateDisplayingMemo();
+        }
+
         // save settings and exit
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
@@ -60,6 +80,10 @@ namespace UnforgettableMemo.WinDesktop
         // save memo when text changed
         private void txtContent_TextChanged(object sender, TextChangedEventArgs e)
         {
+            // reset timer
+            this.timer.Stop();
+            this.timer.Start();
+
             UpdateFrontend();
             this.memoScheduler.Save();
         }
