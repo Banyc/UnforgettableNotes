@@ -32,4 +32,5 @@ For fast development, the memos are currently stored as JSON.
 
 ## TODO
 
+- [ ] Support social media bot
 - [ ] Sync on cloud
