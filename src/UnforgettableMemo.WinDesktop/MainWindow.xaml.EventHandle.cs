@@ -81,10 +81,6 @@ namespace UnforgettableMemo.WinDesktop
         // save memo when text changed
         private void txtContent_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // reset timer
-            this.timer.Stop();
-            this.timer.Start();
-
             UpdateFrontend();
             this.memoScheduler.Save();
         }
@@ -93,6 +89,19 @@ namespace UnforgettableMemo.WinDesktop
         private void Window_Deactivated(object sender, EventArgs e)
         {
             this.Activate();
+        }
+
+        // stop swapping memos when user is editing the current memo
+        private void txtContent_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            // reset timer
+            this.timer.Stop();
+        }
+
+        // stop swapping memos until user finish editing the current memo
+        private void txtContent_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            this.timer.Start();
         }
     }
 }
