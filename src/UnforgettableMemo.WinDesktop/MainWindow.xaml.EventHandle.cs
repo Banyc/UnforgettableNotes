@@ -81,6 +81,11 @@ namespace UnforgettableMemo.WinDesktop
         // save memo when text changed
         private void txtContent_TextChanged(object sender, TextChangedEventArgs e)
         {
+            // avoid events burst when swapping memos
+            if (!this.txtContent.IsFocused)
+            {
+                return;
+            }
             UpdateFrontend();
             this.memoScheduler.Save();
         }
@@ -102,6 +107,16 @@ namespace UnforgettableMemo.WinDesktop
         private void txtContent_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             this.timer.Start();
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            // avoid maximum of window
+            // the maximum could not reverse
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
         }
     }
 }
