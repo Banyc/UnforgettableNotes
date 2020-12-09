@@ -83,6 +83,7 @@ namespace UnforgettableMemo.WinDesktop
             {
                 if (this.viewModel.DisplayingMemo.Retrievability < this.mainWindowSettings.RetrievabilityThreshold)
                 {
+                    this.Topmost = false;
                     this.Topmost = true;
                     this.topBar.Background = Brushes.OrangeRed;
                 }
@@ -92,6 +93,7 @@ namespace UnforgettableMemo.WinDesktop
                     this.topBar.Background = this.Background;
                 }
             }
+            this.UpdateLayout();
         }
 
         private void UpdateTxtContent()
