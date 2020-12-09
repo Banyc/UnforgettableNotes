@@ -6,8 +6,9 @@
 
 ## Features
 
+- It only shows **the least remembered memo**.
+- **The window pops up** when there is a memo somewhat **forgotten**.
 - The memo saves when the text is changed.
-- The window pops up when there is a memo somewhat forgotten.
 - The window could not be deactivated but could be covered by other windows if every memo has not been forgotten.
 - When the review button (✔️) is clicked, the memory status updates.
 - Every 30 min the displaying memo is swapped to the least remembered one.
