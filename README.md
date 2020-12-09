@@ -1,6 +1,6 @@
 # UnforgettableMemo
 
-A memo APP that shows memos based on memory decay theory. 
+📒 A memo APP that shows memos based on memory decay theory. 🧠 Least time for more remembering tasks! ⚡
 
 ![](img/screenshot.mainWindow.png)
 
