@@ -10,6 +10,17 @@ A memo APP that shows memos based on memory decay theory.
 - The window pops up when there is a memo somewhat forgotten.
 - The window could not be deactivated but could be covered by other windows if every memo has not been forgotten.
 - When the review button (✔️) is clicked, the memory status updates.
+- Every 30 min the displaying memo is swapped to the least remembered one.
+
+## How to Use
+
+- Write a memo in the middle textbox.
+- Click the top-left "+" button to add a new memo
+- Memos are saved in realtime.
+- Click the bottom-left "✔️" button to review the displaying memo and swap to the other least remembered memo.
+- Click the bottom-left "🗑" button to remove the displaying memo.
+- Click the top-right "🔄" button to swap to the other least remembered memo.
+- Click the top-right "X" button to permanently close the application.
 
 ## Install Desktop Client
 
