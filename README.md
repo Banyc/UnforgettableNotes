@@ -28,6 +28,12 @@
 1. Download the executable from the release page
 1. Schedule a startup for the executable
 
+## Tips
+
+-   Don't click the review button ("✔️") unless you have 100% confidence on remembering the memo at that point.
+-   Click the delete button ("🗑") if the memo is no longer needed or fully remembered.
+-   Don't click the exit button ("X") if you don't want to **permanently** exit the APP. If you want it to pop up next time, simply switch to your working software.
+
 ## Memory Decay Theory
 
 The logic is based on the forgetting curve, mainly from this website <https://supermemo.guru/wiki/Forgetting_curve>.
@@ -36,9 +42,7 @@ The logic is based on the forgetting curve, mainly from this website <https://su
 
 > Forgetting curve describes the decline in the probability of recall over time:
 >
-> $$
-> R = exp ^ {-t / S}
-> $$
+> <img src="https://render.githubusercontent.com/render/math?math=R = e ^ {-t / S}"/>
 >
 > where:
 >
@@ -52,9 +56,7 @@ The logic is based on the forgetting curve, mainly from this website <https://su
 
 > The formula for the stabilization curve:
 >
-> $$
-> SInc = SInc_{Max} * e ^ {-Gain * R}
-> $$
+> <img src="https://render.githubusercontent.com/render/math?math=SInc = SInc_{Max} * e ^ {-Gain * R}"/>
 >
 > where:
 >
