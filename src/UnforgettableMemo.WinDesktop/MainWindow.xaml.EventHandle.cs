@@ -82,6 +82,8 @@ namespace UnforgettableMemo.WinDesktop
                 IsPreemptive = this.mainWindowSettings.IsPreemptive,
                 RetrievabilityThreshold = this.mainWindowSettings.RetrievabilityThreshold
             });
+            this.memoScheduler.Save();
+            this.energyScheduler.Save();
             this.Close();
         }
 

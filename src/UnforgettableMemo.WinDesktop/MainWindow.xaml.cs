@@ -87,6 +87,7 @@ namespace UnforgettableMemo.WinDesktop
                 memo = this.memoScheduler.GetNewMemo();
             }
             this.viewModel.DisplayingMemo = memo;
+            // debug only
             // this.memoScheduler.Save();
         }
 
@@ -94,7 +95,8 @@ namespace UnforgettableMemo.WinDesktop
         {
             // energy
             this.viewModel.Energy = this.energyScheduler.Energy;
-            this.energyScheduler.Save();
+            // debug only
+            // this.energyScheduler.Save();
         }
 
         // update view only
