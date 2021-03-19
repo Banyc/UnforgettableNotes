@@ -37,7 +37,10 @@ namespace UnforgettableMemo.Shared.Energy
 
         private void UpdateLastEnergy()
         {
-            this.settings.LastEnergy += GetEnergy(DateTime.UtcNow - settings.LastUpdateTime);
+            this.settings.LastEnergy =
+                Math.Min(
+                    this.settings.LastEnergy + GetEnergy(DateTime.UtcNow - settings.LastUpdateTime),
+                    this.settings.MaxEnergy);
             this.settings.LastUpdateTime = DateTime.UtcNow;
         }
 
