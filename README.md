@@ -80,7 +80,7 @@ For fast development, the memos are currently stored as JSON.
 
 ## TODO
 
--   [ ] Introduce energy.
+-   [x] Introduce energy.
 -   [ ] Introduce cooling time between sticky notes.
 -   [ ] Support social media bot
 -   [ ] Desktop applications support cross-platform

@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using UnforgettableMemo.Shared;
+using UnforgettableMemo.Shared.Energy;
 using UnforgettableMemo.Shared.Models;
 
 namespace UnforgettableMemo.WinDesktop
@@ -27,6 +28,7 @@ namespace UnforgettableMemo.WinDesktop
         private readonly string settingsDirectory = "desktop";
         private readonly string settingsFilename = "mainWindowSettings.json";
         private readonly MemoScheduler memoScheduler;
+        private readonly EnergyScheduler energyScheduler;
         private readonly DispatcherTimer timer;
 
         public MainWindow()
@@ -47,10 +49,9 @@ namespace UnforgettableMemo.WinDesktop
 
             // initiate memoScheduler
             MemoSchedulerFactory memoSchedulerFactory = new MemoSchedulerFactory("memos/");
-            this.memoScheduler = memoSchedulerFactory.GetMemoScheduler();
-            this.memoScheduler.Load();
+            (this.memoScheduler, this.energyScheduler) = memoSchedulerFactory.GetSchedulers();
 
-            UpdateDisplayingMemo();
+            UpdateViewModel();
 
             // initiate timer
             this.timer = new DispatcherTimer()
@@ -61,27 +62,34 @@ namespace UnforgettableMemo.WinDesktop
         }
 
         // Display the least memorized memo
-        private void UpdateDisplayingMemo()
+        private void UpdateViewModel()
         {
+            // memo
             this.memoScheduler.OrderByRetrievability();
-            if (this.memoScheduler.Memos.Count == 0)
+            var memo = this.memoScheduler.GetLeastRetrievedMemo();
+            if (memo == null)
             {
-                this.memoScheduler.GetNewMemo();
+                memo = this.memoScheduler.GetNewMemo();
             }
-            this.viewModel.DisplayingMemo = this.memoScheduler.Memos[0];
-            UpdateFrontend();
-
+            this.viewModel.DisplayingMemo = memo;
             this.memoScheduler.Save();
+
+            // energy
+            this.viewModel.Energy = this.energyScheduler.Energy;
+            this.energyScheduler.Save();
+
+            UpdateView();
         }
 
         // update view only
-        private void UpdateFrontend()
+        private void UpdateView()
         {
+            UpdateTxtEnergy();
             UpdateTxtContent();
             // set window topmost if the displaying memo is somewhat not remembered
             if (this.mainWindowSettings.IsPreemptive)
             {
-                if (this.viewModel.DisplayingMemo.Retrievability < this.mainWindowSettings.RetrievabilityThreshold)
+                if (this.viewModel.DisplayingMemo?.Retrievability < this.mainWindowSettings.RetrievabilityThreshold)
                 {
                     this.Topmost = false;
                     this.Topmost = true;
@@ -100,6 +108,13 @@ namespace UnforgettableMemo.WinDesktop
         {
             BindingExpression binding = this.txtContent.GetBindingExpression(TextBox.TextProperty);
             binding.UpdateSource();
+        }
+
+        private void UpdateTxtEnergy()
+        {
+            // BindingExpression binding = this.txtEnergy.GetBindingExpression(TextBox.TextProperty);
+            // binding.UpdateSource();
+            this.txtEnergy.Text = this.viewModel.Energy.ToString();
         }
     }
 }

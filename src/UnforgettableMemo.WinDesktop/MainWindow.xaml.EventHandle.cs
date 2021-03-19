@@ -11,7 +11,7 @@ namespace UnforgettableMemo.WinDesktop
         // Display the least memorized memo
         private void Timer_Tick(object sender, EventArgs e)
         {
-            UpdateDisplayingMemo();
+            UpdateViewModel();
 
             // make sure the timer is set
             this.timer.Start();
@@ -30,7 +30,7 @@ namespace UnforgettableMemo.WinDesktop
                 return;
             }
             this.viewModel.DisplayingMemo = this.memoScheduler.GetNewMemo();
-            UpdateFrontend();
+            UpdateView();
             this.txtContent.Focus();
             this.memoScheduler.Save();
         }
@@ -39,14 +39,14 @@ namespace UnforgettableMemo.WinDesktop
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             this.memoScheduler.RemoveMemo(viewModel.DisplayingMemo);
-            UpdateDisplayingMemo();
+            UpdateViewModel();
         }
 
         // update the memory state of the displaying memo and display the least memorized memo
         private void btnReview_Click(object sender, RoutedEventArgs e)
         {
             this.viewModel.DisplayingMemo.Review();
-            UpdateDisplayingMemo();
+            UpdateViewModel();
         }
 
         // Display the least memorized memo
@@ -56,7 +56,7 @@ namespace UnforgettableMemo.WinDesktop
             this.timer.Stop();
             this.timer.Start();
 
-            UpdateDisplayingMemo();
+            UpdateViewModel();
         }
 
         // save settings and exit
@@ -86,7 +86,7 @@ namespace UnforgettableMemo.WinDesktop
             {
                 return;
             }
-            UpdateFrontend();
+            UpdateView();
             this.memoScheduler.Save();
         }
 

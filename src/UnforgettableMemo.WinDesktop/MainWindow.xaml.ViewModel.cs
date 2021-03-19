@@ -8,6 +8,7 @@ namespace UnforgettableMemo.WinDesktop
         public class MainWindowViewModel
         {
             public Memo DisplayingMemo { get; set; }
+            public int Energy { get; set; }
         }
     }
 }

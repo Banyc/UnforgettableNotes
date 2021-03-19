@@ -14,7 +14,7 @@ namespace UnforgettableMemo.Shared.Tests
             var memos = scheduler.Memos;
 
             scheduler.Save();
-            scheduler.Load();
+            scheduler = GetMemoSchedulerWithTwoMemos();
 
             Assert.Equal(2, scheduler.Memos.Count);
             Assert.Equal(memos[0].Content, scheduler.Memos[0].Content);

@@ -3,9 +3,9 @@ using UnforgettableMemo.Shared.Models;
 
 namespace UnforgettableMemo.Shared.Data
 {
-    public interface IMemoPersistence
+    public interface IPersistence<T>
     {
-        void Save(List<Memo> memos);
-        List<Memo> Load();
+        void Save(T data);
+        T Load();
     }
 }

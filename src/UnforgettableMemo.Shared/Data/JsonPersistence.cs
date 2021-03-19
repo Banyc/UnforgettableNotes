@@ -5,28 +5,27 @@ using System.Text.Json;
 
 namespace UnforgettableMemo.Shared.Data
 {
-    public class JsonPersistence : IMemoPersistence
+    public class JsonPersistence<T> : IPersistence<T>
     {
         private string FileDirctory { get; }
         private string Filename { get; }
-        public JsonPersistence(string fileDirctory, string filename = "memos.json")
+        public JsonPersistence(string fileDirctory, string filename)
         {
             this.FileDirctory = fileDirctory;
             this.Filename = filename;
         }
-        public List<Memo> Load()
+        public T Load()
         {
             string filePath = Path.Combine(this.FileDirctory, this.Filename);
             if (!File.Exists(filePath))
             {
-                return new List<Memo>();
+                return default;
             }
             string fileText = File.ReadAllText(filePath);
-            List<Memo> memos = JsonSerializer.Deserialize<List<Memo>>(fileText);
-            return memos;
+            return JsonSerializer.Deserialize<T>(fileText);
         }
 
-        public void Save(List<Memo> memos)
+        public void Save(T memos)
         {
             Directory.CreateDirectory(this.FileDirctory);
             string fileText = JsonSerializer.Serialize(memos, new JsonSerializerOptions()
