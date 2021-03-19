@@ -29,7 +29,8 @@ namespace UnforgettableMemo.WinDesktop
         private readonly string settingsFilename = "mainWindowSettings.json";
         private readonly MemoScheduler memoScheduler;
         private readonly EnergyScheduler energyScheduler;
-        private readonly DispatcherTimer timer;
+        private readonly DispatcherTimer timerUpdateDisplayMemo;
+        private readonly DispatcherTimer timerUpdateEnergy;
 
         public MainWindow()
         {
@@ -52,17 +53,29 @@ namespace UnforgettableMemo.WinDesktop
             (this.memoScheduler, this.energyScheduler) = memoSchedulerFactory.GetSchedulers();
 
             UpdateViewModel();
+            UpdateView();
 
             // initiate timer
-            this.timer = new DispatcherTimer()
+            this.timerUpdateDisplayMemo = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromMinutes(30)
             };
-            this.timer.Tick += Timer_Tick;
+            this.timerUpdateDisplayMemo.Tick += TimerUpdateDisplayMemo_Tick;
+            this.timerUpdateEnergy = new DispatcherTimer()
+            {
+                Interval = TimeSpan.FromMinutes(1)
+            };
+            this.timerUpdateEnergy.Tick += TimerUpdateEnergy_Tick;
         }
 
         // Display the least memorized memo
         private void UpdateViewModel()
+        {
+            UpdateViewModelDisplayMemo();
+            UpdateViewModelEnergy();
+        }
+
+        private void UpdateViewModelDisplayMemo()
         {
             // memo
             this.memoScheduler.OrderByRetrievability();
@@ -72,13 +85,14 @@ namespace UnforgettableMemo.WinDesktop
                 memo = this.memoScheduler.GetNewMemo();
             }
             this.viewModel.DisplayingMemo = memo;
-            this.memoScheduler.Save();
+            // this.memoScheduler.Save();
+        }
 
+        private void UpdateViewModelEnergy()
+        {
             // energy
             this.viewModel.Energy = this.energyScheduler.Energy;
             this.energyScheduler.Save();
-
-            UpdateView();
         }
 
         // update view only
@@ -112,8 +126,6 @@ namespace UnforgettableMemo.WinDesktop
 
         private void UpdateTxtEnergy()
         {
-            // BindingExpression binding = this.txtEnergy.GetBindingExpression(TextBox.TextProperty);
-            // binding.UpdateSource();
             this.txtEnergy.Text = this.viewModel.Energy.ToString();
         }
     }

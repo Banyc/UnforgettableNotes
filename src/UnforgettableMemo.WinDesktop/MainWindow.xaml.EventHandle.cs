@@ -9,12 +9,22 @@ namespace UnforgettableMemo.WinDesktop
     public partial class MainWindow
     {
         // Display the least memorized memo
-        private void Timer_Tick(object sender, EventArgs e)
+        private void TimerUpdateDisplayMemo_Tick(object sender, EventArgs e)
         {
-            UpdateViewModel();
+            UpdateViewModelDisplayMemo();
+            UpdateView();
 
             // make sure the timer is set
-            this.timer.Start();
+            this.timerUpdateDisplayMemo.Start();
+        }
+
+        private void TimerUpdateEnergy_Tick(object sender, EventArgs e)
+        {
+            UpdateViewModelEnergy();
+            UpdateView();
+
+            // make sure the timer is set
+            this.timerUpdateDisplayMemo.Start();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -40,6 +50,7 @@ namespace UnforgettableMemo.WinDesktop
         {
             this.memoScheduler.RemoveMemo(viewModel.DisplayingMemo);
             UpdateViewModel();
+            UpdateView();
         }
 
         // update the memory state of the displaying memo and display the least memorized memo
@@ -47,16 +58,18 @@ namespace UnforgettableMemo.WinDesktop
         {
             this.viewModel.DisplayingMemo.Review();
             UpdateViewModel();
+            UpdateView();
         }
 
         // Display the least memorized memo
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             // reset timer
-            this.timer.Stop();
-            this.timer.Start();
+            this.timerUpdateDisplayMemo.Stop();
+            this.timerUpdateDisplayMemo.Start();
 
             UpdateViewModel();
+            UpdateView();
         }
 
         // save settings and exit
@@ -100,13 +113,13 @@ namespace UnforgettableMemo.WinDesktop
         private void txtContent_GotKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             // reset timer
-            this.timer.Stop();
+            this.timerUpdateDisplayMemo.Stop();
         }
 
         // stop swapping memos until user finish editing the current memo
         private void txtContent_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            this.timer.Start();
+            this.timerUpdateDisplayMemo.Start();
         }
 
         private void Window_StateChanged(object sender, EventArgs e)
