@@ -12,7 +12,7 @@ namespace UnforgettableMemo.Shared.Energy
             get
             {
                 UpdateLastEnergy();
-                return this.settings.LastEnergy;
+                return (int)this.settings.LastEnergy;
             }
         }
 
@@ -44,9 +44,9 @@ namespace UnforgettableMemo.Shared.Energy
             this.settings.LastUpdateTime = DateTime.UtcNow;
         }
 
-        private static int GetEnergy(TimeSpan timeSpan)
+        private static double GetEnergy(TimeSpan timeSpan)
         {
-            return (int)timeSpan.TotalMinutes / 5;
+            return timeSpan.TotalMinutes / 5;
         }
 
         public void Save()

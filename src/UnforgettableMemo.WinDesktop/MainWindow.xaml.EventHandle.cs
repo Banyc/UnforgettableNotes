@@ -24,7 +24,7 @@ namespace UnforgettableMemo.WinDesktop
             UpdateView();
 
             // make sure the timer is set
-            this.timerUpdateDisplayMemo.Start();
+            this.timerUpdateEnergy.Start();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

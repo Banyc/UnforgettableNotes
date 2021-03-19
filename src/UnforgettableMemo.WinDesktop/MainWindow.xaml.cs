@@ -61,11 +61,13 @@ namespace UnforgettableMemo.WinDesktop
                 Interval = TimeSpan.FromMinutes(30)
             };
             this.timerUpdateDisplayMemo.Tick += TimerUpdateDisplayMemo_Tick;
+            this.timerUpdateDisplayMemo.Start();
             this.timerUpdateEnergy = new DispatcherTimer()
             {
                 Interval = TimeSpan.FromMinutes(1)
             };
             this.timerUpdateEnergy.Tick += TimerUpdateEnergy_Tick;
+            this.timerUpdateEnergy.Start();
         }
 
         // Display the least memorized memo
