@@ -20,13 +20,14 @@ namespace UnforgettableMemo.WinDesktop
 
         private void TimerFrequent_Tick(object sender, EventArgs e)
         {
-            UpdateViewModelEnergy();
-
             // during the cooling period
             if (string.IsNullOrWhiteSpace(this.viewModel.DisplayingMemo.Content) && !this.txtContent.IsFocused)
             {
+                // update energy
                 UpdateViewModelDisplayMemo();
             }
+
+            UpdateViewModelEnergy();
 
             UpdateView();
 
