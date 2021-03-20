@@ -58,6 +58,7 @@ namespace UnforgettableMemo.WinDesktop
             this.memoScheduler.RemoveMemo(viewModel.DisplayingMemo);
             UpdateViewModel();
             UpdateView();
+            this.memoScheduler.Save();
         }
 
         // update the memory state of the displaying memo and display the least memorized memo
