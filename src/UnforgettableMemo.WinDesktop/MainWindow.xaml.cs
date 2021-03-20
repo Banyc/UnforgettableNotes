@@ -30,7 +30,7 @@ namespace UnforgettableMemo.WinDesktop
         private readonly MemoScheduler memoScheduler;
         private readonly EnergyScheduler energyScheduler;
         private readonly DispatcherTimer timerUpdateDisplayMemo;
-        private readonly DispatcherTimer timerUpdateEnergy;
+        private readonly DispatcherTimer timerFrequent;
 
         public MainWindow()
         {
@@ -62,12 +62,12 @@ namespace UnforgettableMemo.WinDesktop
             };
             this.timerUpdateDisplayMemo.Tick += TimerUpdateDisplayMemo_Tick;
             this.timerUpdateDisplayMemo.Start();
-            this.timerUpdateEnergy = new DispatcherTimer()
+            this.timerFrequent = new DispatcherTimer()
             {
-                Interval = TimeSpan.FromMinutes(1)
+                Interval = TimeSpan.FromSeconds(5)
             };
-            this.timerUpdateEnergy.Tick += TimerUpdateEnergy_Tick;
-            this.timerUpdateEnergy.Start();
+            this.timerFrequent.Tick += TimerFrequent_Tick;
+            this.timerFrequent.Start();
         }
 
         // Display the least memorized memo
@@ -80,11 +80,10 @@ namespace UnforgettableMemo.WinDesktop
         private void UpdateViewModelDisplayMemo()
         {
             // memo
-            this.memoScheduler.OrderByRetrievability();
             var memo = this.memoScheduler.GetLeastRetrievedMemo();
             if (memo == null)
             {
-                memo = this.memoScheduler.GetNewMemo();
+                memo = this.memoScheduler.GetBlankMemo();
             }
             this.viewModel.DisplayingMemo = memo;
             // debug only

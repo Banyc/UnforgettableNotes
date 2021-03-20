@@ -18,13 +18,20 @@ namespace UnforgettableMemo.WinDesktop
             this.timerUpdateDisplayMemo.Start();
         }
 
-        private void TimerUpdateEnergy_Tick(object sender, EventArgs e)
+        private void TimerFrequent_Tick(object sender, EventArgs e)
         {
             UpdateViewModelEnergy();
+
+            // during the cooling period
+            if (string.IsNullOrWhiteSpace(this.viewModel.DisplayingMemo.Content) && !this.txtContent.IsFocused)
+            {
+                UpdateViewModelDisplayMemo();
+            }
+
             UpdateView();
 
             // make sure the timer is set
-            this.timerUpdateEnergy.Start();
+            this.timerFrequent.Start();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +46,7 @@ namespace UnforgettableMemo.WinDesktop
             {
                 return;
             }
-            this.viewModel.DisplayingMemo = this.memoScheduler.GetNewMemo();
+            this.viewModel.DisplayingMemo = this.memoScheduler.GetBlankMemo();
             UpdateView();
             this.txtContent.Focus();
             this.memoScheduler.Save();
