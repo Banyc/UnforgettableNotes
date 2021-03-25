@@ -33,7 +33,7 @@ namespace UnforgettableMemo.Shared
 
         public Memo GetLeastRetrievedMemo()
         {
-            if (this.settings.CoolingTimeSpan > DateTime.UtcNow - this.settings.LastGetLeastRetrievedMemoTime)
+            if (this.settings.CoolingTimeSpan > DateTime.UtcNow - this.settings.LastCoolingStartTime)
             {
                 return null;
             }
@@ -44,13 +44,17 @@ namespace UnforgettableMemo.Shared
             else if (this.energyScheduler.TryConsumeEnergy(this.settings.EnergyCost))
             {
                 this.OrganizeMemos();
-                this.settings.LastGetLeastRetrievedMemoTime = DateTime.UtcNow;
                 return this.Memos.First();
             }
             else
             {
                 return null;
             }
+        }
+
+        public void StartCooling()
+        {
+            this.settings.LastCoolingStartTime = DateTime.UtcNow;
         }
 
         // get new memo that has just been added to the list

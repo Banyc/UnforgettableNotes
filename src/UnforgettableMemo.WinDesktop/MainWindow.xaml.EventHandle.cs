@@ -65,6 +65,7 @@ namespace UnforgettableMemo.WinDesktop
         // update the memory state of the displaying memo and display the least memorized memo
         private void btnReview_Click(object sender, RoutedEventArgs e)
         {
+            this.memoScheduler.StartCooling();
             this.viewModel.DisplayingMemo.Review();
             UpdateViewModel();
             UpdateView();

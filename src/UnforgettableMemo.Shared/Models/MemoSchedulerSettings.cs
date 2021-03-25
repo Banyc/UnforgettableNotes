@@ -18,7 +18,7 @@ namespace UnforgettableMemo.Shared.Models
                 this.CoolingTimeSpanSeconds = value.TotalSeconds;
             }
         }
-        public DateTime LastGetLeastRetrievedMemoTime { get; set; }
+        public DateTime LastCoolingStartTime { get; set; }
         public int EnergyCost { get; set; } = 3;  // per memo retrieving
     }
 }
