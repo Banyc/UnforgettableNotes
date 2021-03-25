@@ -1,26 +1,26 @@
 # UnforgettableMemo
 
-📒 A memo APP that shows memos based on memory decay theory. 🧠 Least time for more remembering tasks! ⚡
+📒 A sticky note APP that shows sticky notes based on memory decay theory. 🧠 Least time for more remembering tasks! ⚡
 
 ![](img/screenshot.mainWindow.png)
 
 ## Features
 
--   It only shows **the least remembered memo**.
--   **The window pops up** when there is a memo somewhat **forgotten**.
--   The memo saves when the text is changed.
--   The window could not be deactivated but could be covered by other windows if every memo has not been forgotten.
+-   It only shows **the least remembered sticky note**.
+-   **The window pops up** when there is a sticky note somewhat **forgotten**.
+-   The sticky note saves when the text is changed.
+-   The window could not be deactivated but could be covered by other windows if every sticky note has not been forgotten.
 -   When the review button (✔️) is clicked, the memory status updates.
--   Every 30 min the displaying memo is swapped to the least remembered one.
+-   Every 30 min the displaying sticky note is swapped to the least remembered one.
 
 ## How to Use
 
--   Write a memo in the middle textbox.
--   Click the top-left "+" button to add a new memo
--   Memos are saved in realtime.
--   Click the bottom-left "✔️" button to review the displaying memo and swap to the other least remembered memo.
--   Click the bottom-left "🗑" button to remove the displaying memo.
--   Click the top-right "🔄" button to swap to the other least remembered memo.
+-   Write a sticky note in the middle textbox.
+-   Click the top-left "+" button to add a new sticky note
+-   Sticky notes are saved in realtime.
+-   Click the bottom-left "✔️" button to review the displaying sticky note and swap to the other least remembered sticky note.
+-   Click the bottom-left "🗑" button to remove the displaying sticky note.
+-   Click the top-right "🔄" button to swap to the other least remembered sticky note.
 -   Click the top-right "X" button to permanently close the application.
 
 ## Install Desktop Client
@@ -30,8 +30,8 @@
 
 ## Tips
 
--   Don't click the review button ("✔️") unless you have 100% confidence on remembering the memo at that point.
--   Click the delete button ("🗑") if the memo is no longer needed or fully remembered.
+-   Don't click the review button ("✔️") unless you have 100% confidence in remembering the sticky note at that point.
+-   Click the delete button ("🗑") if the sticky note is no longer needed or fully remembered.
 -   Don't click the exit button ("X") if you don't want to **permanently** exit the APP. If you want it to pop up next time, simply switch to your working software.
 
 ## Memory Decay Theory
@@ -72,11 +72,11 @@ The logic is based on the forgetting curve, mainly from this website <https://su
 
 -   Recite vocabularies
 
-## Memo Persistence
+## Sticky Note Persistence
 
 Logic goes [here](src/UnforgettableMemo.Shared/Data).
 
-For fast development, the memos are currently stored as JSON.
+For fast development, the sticky notes are currently stored as JSON.
 
 ## TODO
 
