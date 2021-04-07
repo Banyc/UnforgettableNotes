@@ -69,6 +69,9 @@ namespace UnforgettableMemo.WinDesktop
             this.viewModel.DisplayingMemo.Review();
             UpdateViewModel();
             UpdateView();
+
+            this.memoScheduler.Save();
+            this.energyScheduler.Save();
         }
 
         // Display the least memorized memo
