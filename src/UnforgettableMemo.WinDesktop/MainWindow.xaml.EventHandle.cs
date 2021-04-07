@@ -1,8 +1,10 @@
+using System.Runtime.InteropServices;
 using System.Timers;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace UnforgettableMemo.WinDesktop
 {
@@ -72,6 +74,8 @@ namespace UnforgettableMemo.WinDesktop
 
             this.memoScheduler.Save();
             this.energyScheduler.Save();
+
+            SetAsBottomMost(this);
         }
 
         // Display the least memorized memo
@@ -145,6 +149,20 @@ namespace UnforgettableMemo.WinDesktop
             {
                 WindowState = WindowState.Normal;
             }
+        }
+
+        const int SWP_NOSIZE = 0x1;
+        const int SWP_NOMOVE = 0x2;
+        const int SWP_NOACTIVATE = 0x10;
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, int uFlags);
+        public void SetAsBottomMost(Window wnd) {
+            //  Get the handle to the specified window
+            IntPtr hWnd = (new WindowInteropHelper(wnd).Handle);
+            //  Set the window position to HWND_BOTTOM
+            SetWindowPos(hWnd, new IntPtr(1), 0, 0, 0, 0,
+                (SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE));
         }
     }
 }
